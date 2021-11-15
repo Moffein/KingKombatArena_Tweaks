@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using BepInEx.Configuration;
 using MonoMod.Cil;
 using NS_KingKombatArena;
 using R2API;
@@ -121,6 +122,8 @@ namespace KingKombatArena_Tweaks
                     return false;
                 };
             }
+
+            //Fix heal mult config option giving low HP on duel start.
             On.RoR2.CharacterBody.RecalculateStats += (orig, self) =>
             {
                 orig(self);
@@ -139,7 +142,15 @@ namespace KingKombatArena_Tweaks
 
         private void ReadConfig()
         {
+            weakerStun = base.Config.Bind<bool>(new ConfigDefinition("Stuns", "Weaker Stuns"), true, new ConfigDescription("Players can still attack during stuns.")).Value;
+            allowChainStun = base.Config.Bind<bool>(new ConfigDefinition("Stuns", "Allow Chain Stuns"), false, new ConfigDescription("Allow players to be re-stunned while in a stun (requires Weaker Stuns).")).Value;
 
+            noIFrames = base.Config.Bind<bool>(new ConfigDefinition("I-Frames", "Disable I-Frames"), true, new ConfigDescription("I-Frames give armor instead.")).Value;
+            iFrameArmor = base.Config.Bind<float>(new ConfigDefinition("I-Frames", "I-Frame Armor"), 200f, new ConfigDescription("Armor to give if I-Frames are disabled.")).Value;
+
+            disableMicrobots = base.Config.Bind<bool>(new ConfigDefinition("Captain", "Disable Defensive Microbots"), true, new ConfigDescription("Disables Defensive Microbots during duels.")).Value;
+        
+            damageMult = base.Config.Bind<float>(new ConfigDefinition("Stats", "Damage Multiplier"), 1f, new ConfigDescription("Multiplies player damage during duels.")).Value;
         }
     }
 
