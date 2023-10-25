@@ -111,6 +111,7 @@ namespace KingKombatArena_Tweaks
                     }
                 };
             }
+
             if (disableMicrobots)
             {
                 On.EntityStates.CaptainDefenseMatrixItem.DefenseMatrixOn.DeleteNearbyProjectile += (orig, self) =>
