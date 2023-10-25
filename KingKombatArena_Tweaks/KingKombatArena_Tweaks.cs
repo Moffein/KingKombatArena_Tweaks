@@ -12,8 +12,8 @@ using UnityEngine.Networking;
 namespace KingKombatArena_Tweaks
 {
     [BepInDependency("com.bepis.r2api")]
-    [BepInDependency("com.Kingpinush.KingKombatArena", BepInDependency.DependencyFlags.SoftDependency)]
-    [BepInPlugin("com.Moffein.KingKombatArena_Tweaks", "KingKombatArena Tweaks", "1.0.0")]
+    [BepInDependency("com.Kingpinush.KingKombatArena", BepInDependency.DependencyFlags.HardDependency)]
+    [BepInPlugin("com.Moffein.KingKombatArena_Tweaks", "KingKombatArena Tweaks", "1.0.2")]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     [R2API.Utils.R2APISubmoduleDependency(nameof(RecalculateStatsAPI))]
     public class KingKombatArena_Tweaks : BaseUnityPlugin
@@ -124,7 +124,7 @@ namespace KingKombatArena_Tweaks
             }
 
             //Fix heal mult config option giving low HP on duel start.
-            On.RoR2.CharacterBody.RecalculateStats += (orig, self) =>
+            /*On.RoR2.CharacterBody.RecalculateStats += (orig, self) =>
             {
                 orig(self);
                 if (duelActive)
@@ -137,7 +137,7 @@ namespace KingKombatArena_Tweaks
                         self.healthComponent.shield = self.healthComponent.fullShield;
                     }
                 }
-            };
+            };*/
         }
 
         private void ReadConfig()
