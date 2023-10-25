@@ -123,21 +123,21 @@ namespace KingKombatArena_Tweaks
                 };
             }
 
-            //Fix heal mult config option giving low HP on duel start.
-            /*On.RoR2.CharacterBody.RecalculateStats += (orig, self) =>
+            On.RoR2.CharacterBody.RecalculateStats += (orig, self) =>
             {
                 orig(self);
                 if (duelActive)
                 {
                     self.damage *= damageMult;
 
-                    if (self.HasBuff(RoR2Content.Buffs.Immune) && self.healthComponent)
+                    //Fix heal mult config option giving low HP on duel start.
+                    /*if (self.HasBuff(RoR2Content.Buffs.Immune) && self.healthComponent)
                     {
                         self.healthComponent.health = self.maxHealth;
                         self.healthComponent.shield = self.healthComponent.fullShield;
-                    }
+                    }*/
                 }
-            };*/
+            };
         }
 
         private void ReadConfig()
